@@ -48,8 +48,19 @@ inline void Btree<T>::add(T el)
 template<typename T>
 inline void Btree<T>::del(T el)
 {
-	if(search_ptr(el)!=0)
+	Node<T>*tmp = search_ptr(el);
+	if (tmp != 0)
+		search_ptr(el) = nullptr;
+	//delete search_ptr(el);
 
+	/*if(tmp->getPrevPtr()!=0)
+		if(el < tmp->getPrevPtr()->getEl())
+			tmp->getPrevPtr()->getLeftPtr()
+
+	if ( tmp != 0 && tmp!=root)
+			tmp;*/
+
+	size--;
 }
 
 template<typename T>

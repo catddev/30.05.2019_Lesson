@@ -7,13 +7,16 @@ class Node {
 	T el;
 	Node*leftPtr;
 	Node*rightPtr;
+	Node*prevPtr;
 
 public:
 	Node<T>(T el);
 	void setLeftPtr(Node<T>*ptr);
 	void setRightPtr(Node<T>*ptr);
+	void setPrevPtr(Node<T>*ptr);
 	Node<T>* &getLeftPtr();
 	Node<T>* &getRightPtr();
+	Node<T>* &getPrevPtr();
 	T& getEl();
 
 };
@@ -37,6 +40,12 @@ inline void Node<T>::setRightPtr(Node<T> * ptr)
 }
 
 template<typename T>
+inline void Node<T>::setPrevPtr(Node<T>* ptr)
+{
+	prevPtr = ptr;
+}
+
+template<typename T>
 inline Node<T>* & Node<T>::getLeftPtr()//always twice Node<T>!!!!!!!!!!!
 {
 	return leftPtr;
@@ -46,6 +55,12 @@ template<typename T>
 inline Node<T>* & Node<T>::getRightPtr()
 {
 	return rightPtr;
+}
+
+template<typename T>
+inline Node<T>*& Node<T>::getPrevPtr()
+{
+	return prevPtr;
 }
 
 template<typename T>
