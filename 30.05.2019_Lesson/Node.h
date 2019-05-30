@@ -10,10 +10,10 @@ class Node {
 
 public:
 	Node<T>(T el);
-	void setLeftPtr(Node*ptr);
-	void setRightPtr(Node*ptr);
-	Node* &getLeftPtr();
-	Node* &getRightPtr();
+	void setLeftPtr(Node<T>*ptr);
+	void setRightPtr(Node<T>*ptr);
+	Node<T>* &getLeftPtr();
+	Node<T>* &getRightPtr();
 	T& getEl();
 
 };
@@ -25,13 +25,13 @@ inline Node<T>::Node(T el)
 }
 
 template<typename T>
-inline void Node<T>::setLeftPtr(Node * ptr)
+inline void Node<T>::setLeftPtr(Node<T> * ptr)
 {
 	leftPtr = ptr;
 }
 
 template<typename T>
-inline void Node<T>::setRightPtr(Node * ptr)
+inline void Node<T>::setRightPtr(Node<T> * ptr)
 {
 	rightPtr = ptr;
 }
