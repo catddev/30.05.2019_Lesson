@@ -8,13 +8,16 @@ class Btree {
 	void add_helper(T el, Node<T>*& nodePtr);//PRIVATE METHOD!
 	void print_helper(Node<T>* ptr);
 	bool search_helper(T el, Node<T>* ptr);
+	Node<T>* &search_ptr_helper(T el, Node<T>*ptr);
 public:
 	Btree();
 	void add(T el);
-	//void del();
+	void del(T el);
+
 	void print();
+
 	bool search(T el);
-	//Node*& search(T el);
+	Node<T>*& search_ptr(T el);
 	int getSize();
 
 };
@@ -40,6 +43,13 @@ inline void Btree<T>::add(T el)
 		else
 			add_helper(el, root->getRightPtr());
 	}
+}
+
+template<typename T>
+inline void Btree<T>::del(T el)
+{
+	if(search_ptr(el)!=0)
+
 }
 
 template<typename T>
@@ -127,6 +137,42 @@ inline bool Btree<T>::search(T el)
 			f =  search_helper(el, root->getRightPtr());
 
 	return f;
+}
+
+template<typename T>
+inline Node<T> *& Btree<T>::search_ptr(T el)
+{
+	Node<T>*tmp = 0;
+	if (el == root->getEl())
+		return root;//!
+
+	if (root->getLeftPtr() != 0)
+		tmp = search_ptr_helper(el, root->getLeftPtr()); //можно сразу вернуть указатель
+
+	if (tmp == 0)//обязательное условие
+		if (root->getRightPtr() != 0)
+			tmp = search_ptr_helper(el, root->getRightPtr());
+
+	return tmp;
+}
+
+template<typename T>
+inline Node<T>*& Btree<T>::search_ptr_helper(T el, Node<T>* ptr)
+{
+	Node<T>*tmp = 0;
+	if (ptr != 0)
+		if (ptr->getEl() == el)
+			return ptr;
+
+	if (ptr->getLeftPtr() != 0)
+		tmp = search_ptr_helper(el, ptr->getLeftPtr());
+
+	//если уже f стал true, то не нужно далее ничего искать!!!
+	if (tmp == 0)//обязательное условие, иначе всегда будет по правой части ставить false, даже если в левой уже нашел true
+		if (ptr->getRightPtr() != 0)
+			tmp = search_ptr_helper(el, ptr->getRightPtr());
+
+	return tmp;
 }
 
 template<typename T>
